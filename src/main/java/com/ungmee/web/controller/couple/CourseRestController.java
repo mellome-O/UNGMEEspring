@@ -63,16 +63,18 @@ public class CourseRestController {
 		 */
 		// 더 쉬운방식의 업로드
 				for(MultipartFile file : files ) {
-					//업로드시마다 난수생성
+					//업로드시마다 고유아이디생성
 					UUID uuid = UUID.randomUUID();
-					System.out.println("여기");
+	
 					String realPath =req.getServletContext().getRealPath(url);
 					String fileName=uuid.toString() + "_" + file.getOriginalFilename();//고유값을 가진 파일이름
 					String path= realPath+File.separator+fileName;
 					System.out.println(path);
 					File uploadFile = new File(path);
 					//파일 업로더
-					file.transferTo(uploadFile);			
+					file.transferTo(uploadFile);
+					
+					
 				}
 			
 		return "okay";

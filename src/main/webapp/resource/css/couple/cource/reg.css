@@ -1,5 +1,26 @@
 @charset "UTF-8";
 img{
+	width: 100%;
+
+}
+/* 중앙정렬 */
+#section{
+	width: 940px;
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* contents  */
+.text-contents{
+	display: inline;	
+}
+.spot-ctx{
+	width: 100%;
+}
+.cost-ctx{
+	float:right;
+}
+.trigger-button{
 	width: 500px;
-	height: 300px;
+
 }

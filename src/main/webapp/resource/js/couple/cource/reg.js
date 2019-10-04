@@ -14,7 +14,7 @@ window.addEventListener("load",function(){
 	var regBtn = section.querySelector("#reg-btn");
 	var imgBtn = section.querySelector(".img-btn");
 	var uTemplate = section.querySelector(".upload-template");
-	
+	var spotCtx = section.querySelectorAll(".spot-ctx");
 	
 	//최대 이미지 파일 업로더 갯수 
 	var maxImgList = [];
@@ -22,8 +22,10 @@ window.addEventListener("load",function(){
 	var uploadFileList = [];
 	//추가할 업로드 파일 리스트 카운트
 	var uploadAddCount = 1;
-	
-	//이미지 객체.
+	//내용 리스트
+	var spotCtxList =[];
+
+	//이미지 다루는 객체.
 	function imgFileHandler(e,imgCount){
 		//부모노드
 		var parentNode = e.target.parentNode;
@@ -113,8 +115,7 @@ window.addEventListener("load",function(){
 	file.style.display = "none";
 
 	imgBtn.onclick = imgBtnClickHandler;
-	
-	
+	//드래그드랍 api
 	dropZone.addEventListener("dragenter", function(e) {
 		e.preventDefault();
 		
@@ -217,7 +218,9 @@ window.addEventListener("load",function(){
 		}
 		var clonDiv = document.importNode(uTemplate.content,true);
 		var clonFile = clonDiv.querySelector("input[name=file]");
-		var clonBtn = clonDiv.querySelector(".img-btn");	 
+		var clonBtn = clonDiv.querySelector(".img-btn");
+		var clonCtx = clonDiv.querySelector(".clon-spot-ctx");
+		clonCtx.classList.add("spot-ctx");	 
 		clonFile.style.display="none";
 		clonFile.onchange = imgFileHandler;
 		clonBtn.onclick  = imgBtnClickHandler;
@@ -225,6 +228,28 @@ window.addEventListener("load",function(){
 		section.insertBefore(clonDiv, addBtn);
 	}
 	regBtn.onclick = function(){
+		//루프를 돌면서 내용이 있는지 검사
+		console.log(spotCtx[0].value);
+		for(var i = 0; i<spotCtx.length;i++){
+			//적은 내용잉 없으면 
+			if(!spotCtx[i].value){
+				console.log("내용을 적어주세요");
+				console.log("c :"+spotCtxList.length);
+				console.log("c :"+spotCtx.length);
+				//console.log(spotCtx[1].value);
+				console.log("0"+spotCtx[0].value);
+				return;
+			}
+			//있으면 추가
+			spotCtxList.push(spotCtx[i].value);
+		}
+
+		console.log("c dd:"+spotCtxList.length);
+		for(var h = 0; h<spotCtx.length;h++){
+			//적은 내용잉 없으면 
+			console.log(spotCtx[h].value);
+		}
+
 		var formData = new FormData();
 		//formData 추가 
 		for(var i = 0; i<uploadAddCount; i++){
